@@ -8,7 +8,7 @@
 # Install with this command (from your Pi):
 #
 # curl -L https://install.pivpn.io | bash
-# Make sure you have `curl` installed
+# Make sure you have `curl` installed#
 
 
 ######## VARIABLES #########
@@ -791,7 +791,7 @@ confOpenVPN() {
 
     # Get the PiVPN easy-rsa
     # wget -q -O - "${easyrsaRel}" | $SUDO tar xz -C /etc/openvpn && $SUDO mv /etc/openvpn/EasyRSA-${easyrsaVer} /etc/openvpn/easy-rsa
-    # fix ownership
+    ## fix ownership
     $SUDO chown -R root:root /etc/openvpn/easy-rsa
     $SUDO mkdir /etc/openvpn/easy-rsa/pki
 
