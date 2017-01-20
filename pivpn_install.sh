@@ -28,7 +28,7 @@ PIVPN_DEPS=( openvpn git dhcpcd5 tar wget grep iptables-persistent dnsutils expe
 pivpnGitUrl="https://github.com/pivpn/pivpn.git"
 pivpnFilesDir="/etc/.pivpn"
 easyrsaVer="3.0.1-pivpn1"
-easyrsaRel="https://github.com/pivpn/easy-rsa/releases/download/3.0.1-pivpn1/EasyRSA-3.0.1-pivpn1.tgz"
+easyrsaRel="https://github.com/pivpn/easy-rsa/releases/download/${easyrsaVer}/EasyRSA-${easyrsaVer}.tgz"
 
 # Find the rows and columns. Will default to 80x24 if it can not be detected.
 screen_size=$(stty size 2>/dev/null || echo 24 80) 
@@ -784,6 +784,13 @@ confOpenVPN() {
         exit 1
     fi
 
+    # If easy-rsa exists, remove it
+    #if [[ -d /etc/openvpn/easy-rsa/ ]]; then
+    #    $SUDO rm -rf /etc/openvpn/easy-rsa/
+    #fi
+
+    # Get the PiVPN easy-rsa
+    # wget -q -O - "${easyrsaRel}" | $SUDO tar xz -C /etc/openvpn && $SUDO mv /etc/openvpn/EasyRSA-${easyrsaVer} /etc/openvpn/easy-rsa
     # fix ownership
     $SUDO chown -R root:root /etc/openvpn/easy-rsa
     $SUDO mkdir /etc/openvpn/easy-rsa/pki
